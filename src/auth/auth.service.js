@@ -38,7 +38,7 @@ const registerUserData = async (name, email, password) => {
   });
 
   if (validateUserEmail) {
-    throw new appError("An email address can only be registered once.", 401);
+    throw new appError("An email address can only be registered once.", 409);
   }
 
   const salt = await bcrypt.genSalt(12);

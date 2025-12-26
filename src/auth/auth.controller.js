@@ -23,7 +23,7 @@ const newRegisterUser = async (req, res, next) => {
 
     const userRegister = await registerUserData(name, email, password);
 
-    res.status(200).json({
+    res.status(201).json({
       message: "Register success.",
     });
   } catch (error) {
