@@ -1,35 +1,5 @@
-# Node modules
-node_modules/
-
-# Environment variables
+node_modules
 .env
-
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# OS files
+dist
+coverage
 .DS_Store
-Thumbs.db
-
-# Prisma
-prisma/generated/
-*.prisma-client/
-/src/generated/prisma
-/src/generated/prisma
-/generated/prisma
-
-# Build / output (jika ada)
-dist/
-build/
-
-# IDE / editor
-.vscode/
-.idea/
-*.sublime-workspace
-*.sublime-project
-
-# Optional: npm package lock
-package-lock.json
