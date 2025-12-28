@@ -17,21 +17,6 @@ const newLoginUser = async (req, res, next) => {
   }
 };
 
-const newRegisterUser = async (req, res, next) => {
-  try {
-    const { name, email, password } = req.body;
-
-    const userRegister = await registerUserData(name, email, password);
-
-    res.status(201).json({
-      message: "Register success.",
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
 module.exports = {
   newLoginUser,
-  newRegisterUser,
 };

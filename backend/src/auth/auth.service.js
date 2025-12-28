@@ -30,26 +30,6 @@ const loginUserData = async (email, password) => {
   return token;
 };
 
-const registerUserData = async (name, email, password) => {
-  const validateUserEmail = await prisma.users.findUnique({
-    where: {
-      email,
-    },
-  });
-
-  if (validateUserEmail) {
-    throw new appError("An email address can only be registered once.", 409);
-  }
-
-  const salt = await bcrypt.genSalt(12);
-  const hashedPassword = await bcrypt.hash(password, salt);
-
-  const newUser = await registerUser(name, email, hashedPassword);
-
-  return newUser;
-};
-
 module.exports = {
   loginUserData,
-  registerUserData,
 };

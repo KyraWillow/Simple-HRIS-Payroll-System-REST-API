@@ -1,5 +1,5 @@
 const { prisma } = require("../config/database");
-const AppError = require("../utils/AppError");
+const appError = require("../utils/AppError");
 
 const findAllEmployeeUserData = async () => {
   try {
@@ -15,22 +15,29 @@ const findAllEmployeeUserData = async () => {
     });
     return employee;
   } catch (error) {
-    console.error("Prisma Error:", error);
-    console.error("Error message:", error.message);
-    console.error("Error code:", error.code);
-    console.error("Error meta:", error.meta);
-
-    throw new AppError("Failed to retrieve employee data", 400);
+    throw new appError("Failed to retrieve employee data", 400);
   }
 };
 
-const findEmployeeData = async (id) => {
+const findUserByEmail = async (email) => {
+  try {
+    const user = await prisma.users.findUnique({
+      where: {
+        email: email,
+      },
+    });
+    return user;
+  } catch (error) {
+    throw new appError("Failed to retrieve employee data", 400);
+  }
+};
+
+const profileEmployeeData = async (id) => {
   const employee = await prisma.users.findUnique({
     where: {
       id: id,
     },
     select: {
-      id: true,
       name: true,
       email: true,
       role: true,
@@ -59,6 +66,13 @@ const createNewEmployeeData = async (
         role: role,
         base_salary: base_salary,
       },
+      select: {
+        name: true,
+        email: true,
+        role: true,
+        base_salary: true,
+        join_date: true,
+      },
     });
     return employee;
   } catch (error) {
@@ -68,6 +82,7 @@ const createNewEmployeeData = async (
 
 module.exports = {
   findAllEmployeeUserData,
-  findEmployeeData,
+  findUserByEmail,
+  profileEmployeeData,
   createNewEmployeeData,
 };
